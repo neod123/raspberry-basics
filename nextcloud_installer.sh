@@ -21,8 +21,14 @@ fi
 
 
 
-2. install nextcloud
-
+########## 2. install nextcloud ##########
+cd /var/www
+wget https://download.nextcloud.com/server/releases/latest.tar.bz2
+tar -xvf latest.tar.bz2
+rm latest.tar.bz2*
+adduser --disabled-password --gecos "" nextcloud
+chown -R nextcloud:www-data /var/www/nextcloud
+chmod -R o-rwx /var/www/nextcloud
 
 
 
@@ -64,7 +70,31 @@ else
   sudo systemctl enable mariadb.service
 fi
 
-5. setup domain name
+echo "4.3==> create the Database"
+echo "Database password to set:"
+read m_password
+
+mysql -u root -p < 'CREATE DATABASE nextcloud;
+CREATE USER "nextcloud"@"localhost";
+SET password FOR "nextcloud"@"localhost" = password(\'$m_password\');
+GRANT ALL PRIVILEGES ON nextcloud.* TO "nextcloud"@"localhost" IDENTIFIED BY "$m_password";
+FLUSH PRIVILEGES;
+EXIT'
+
+#
+echo "5.==> setup domain name"
+rm /etc/nginx/sites-available/nextcloud 
+wget  https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/nextcloud > /etc/nginx/sites-available/nextcloud 
+
+echo "Domain to set:"
+read my_domain
+sed -i -e 's/cloud.mondomaine.com/$my_domain/g' /etc/nginx/sites-available/nextcloud 
+
+
+ln -s /etc/nginx/sites-available/nextcloud /etc/nginx/sites-enabled/nextcloud
+systemctl restart nginx.service
+systemctl restart php7.3-fpm.service
+
 
 6. setup certificat
 
