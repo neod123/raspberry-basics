@@ -8,7 +8,7 @@ add-apt-repository ppa:ondrej/nginx
 apt update
 
 
-
+########## install Nginx ##############
 if [ -f /etc/nginx/nginx.conf ]
 then
     echo "==> 1. Nginx already installed"
@@ -21,7 +21,7 @@ else
 fi
 
 
-
+########## install MariaDb ##############
 if [ -f /usr/bin/mariadb ]
 then
     echo "==> 2.3.. MariaDb already installed"
@@ -43,7 +43,7 @@ fi
 
 
 
-
+########## install PHP 7.3 ##############
 if [ -f /usr/bin/php7.3 ]
 then
   echo "4.==> PHP7.3 already installed"
@@ -54,5 +54,7 @@ else
   service php7.3-fpm reload
 fi
 
+
+########## Test ##############
 echo "<?php phpinfo() ?>" > /var/www/html/index.php
 echo "5.==> test: http://localhost/index.php"
