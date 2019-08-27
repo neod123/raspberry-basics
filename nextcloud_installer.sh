@@ -72,19 +72,19 @@ fi
 
 echo "4.3==> create the Database"
 echo "Database password to set:"
-read m_password
+read my_password
 
 mysql -u root -p < 'CREATE DATABASE nextcloud;
 CREATE USER "nextcloud"@"localhost";
-SET password FOR "nextcloud"@"localhost" = password(\'$m_password\');
-GRANT ALL PRIVILEGES ON nextcloud.* TO "nextcloud"@"localhost" IDENTIFIED BY "$m_password";
+SET password FOR "nextcloud"@"localhost" = password(\'$my_password\');
+GRANT ALL PRIVILEGES ON nextcloud.* TO "nextcloud"@"localhost" IDENTIFIED BY "$my_password";
 FLUSH PRIVILEGES;
 EXIT'
 
 #
 echo "5.==> setup domain name"
 rm /etc/nginx/sites-available/nextcloud 
-wget  https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/nextcloud > /etc/nginx/sites-available/nextcloud 
+wget  https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/nextcloud -P /etc/nginx/sites-available/ 
 
 echo "Domain to set:"
 read my_domain
@@ -96,11 +96,46 @@ systemctl restart nginx.service
 systemctl restart php7.3-fpm.service
 
 
-6. setup certificat
+echo "6.==> setup certificat"
+apt-get install -y software-properties-common
+add-apt-repository ppa:certbot/certbot -y
+apt-get update
+apt-get install -y certbot
+certbot certonly --webroot -w /var/www/nextcloud --agree-tos --no-eff-email --email email@mondomaine.com -d $my_domain --rsa-key-size 4096
 
-7. Optimisation
-7.1 timeout
-7.2 cache PHP
-7.3 Redis
+cronjob="0 */12 * * * root test -x /usr/bin/certbot -a \! -d /run/systemd/system && perl -e 'sleep int(rand(3600))' && certbot -q renew
+"
+(crontab -u root -l; echo "$cronjob" ) | crontab -u root -
+
+
+echo "7.==> Optimisation"
+
+echo "7.1.==> Timeout"
+echo "\nrequest_terminate_timeout = 300" >> /etc/php/7.3/fpm/pool.d/nextcloud.conf
+systemctl restart nginx.service
+systemctl restart php7.3-fpm.service
+
+
+
+echo "7.2.==> Cache PHP"
+echo "opcache.enable=1
+opcache.enable_cli=1
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=10000
+opcache.memory_consumption=128
+opcache.save_comments=1
+opcache.revalidate_freq=1"  >> /etc/php/7.3/fpm/php.ini
+
+
+echo "7.3.==> Redis"
+echo "Set the folder (/media/Hard_Drive):"
+read my_data_dir
+rm /var/www/nextcloud/config/config.php
+wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/nextcloud_config/config.php -P /var/www/nextcloud/config/
+sed -i -e 's/MY_DOMAIN/$my_domain/g' /var/www/nextcloud/config/
+sed -i -e 's/MY_DATA_DIR/$my_data_dir/g' /var/www/nextcloud/config/
+sed -i -e 's/MY_PASSWORD/$my_password/g' /var/www/nextcloud/config/
+
+echo "8.==> Test it:"
 
 
