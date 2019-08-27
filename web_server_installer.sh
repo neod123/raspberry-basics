@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wget https://github.com/neod123/raspberry-basics/web_server_installer.sh | sh web_server_installer.sh | rm web_server_installer.sh
+# wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/web_server_installer.sh | sh web_server_installer.sh | rm web_server_installer.sh
 
 apt-get install software-properties-common -y
 add-apt-repository ppa:ondrej/php
