@@ -30,7 +30,7 @@ sudo apt-get install git -y
 
 echo "4.==> install gogs"
 cd /opt
-sudo wget https://dl.gogs.io/0.11.53/gogs_0.11.91_raspi_armv7.zip
+sudo wget https://dl.gogs.io/0.11.91/gogs_0.11.91_raspi_armv7.zip
 sudo unzip gogs_0.11.91_raspi_armv7.zip
 sudo rm gogs_0.11.91_raspi_armv7.zip
 
