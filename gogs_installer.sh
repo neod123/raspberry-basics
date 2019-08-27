@@ -1,21 +1,21 @@
 #!/bin/bash
 
-# https://raw.githubusercontent.com/neod123/raspberry-basics/gogs_installer.sh | sh gogs_installer.sh |  rm  gogs_installer.sh
+# wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_installer.sh | sh gogs_installer.sh |  rm  gogs_installer.sh
 
 
 ########## install MariaDb ##############
 if [ -f /usr/bin/mariadb ]
 then
-    echo "==> 2.3.. MariaDb already installed"
+    echo "==> 1.2. MariaDb already installed"
 else 
 
-  echo "2.==> install MariaDb"
+  echo "1.==> install MariaDb"
   sudo apt-get install mariadb-server mariadb-client -y
   sudo systemctl stop mariadb.service
   sudo systemctl start mariadb.service
   sudo systemctl enable mariadb.service
 
-  echo "3.==> Secure MariaDb"
+  echo "2.==> Secure MariaDb"
   sudo mysql_secure_installation
 
   sudo systemctl stop mariadb.service
