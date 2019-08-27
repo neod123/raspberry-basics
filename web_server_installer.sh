@@ -54,6 +54,8 @@ else
   service php7.3-fpm reload
 fi
 
+rm /etc/nginx/sites-available/default
+wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/web_server_config/default -P /etc/nginx/sites-available/
 
 ########## Test ##############
 echo "<?php phpinfo() ?>" > /var/www/html/index.php
