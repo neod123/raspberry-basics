@@ -55,7 +55,8 @@ else
 fi
 
 rm /etc/nginx/sites-available/default
-wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/web_server_config/default -P /etc/nginx/sites-available/
+wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/web_server_config/default -P  /etc/nginx/sites-available/
+service nginx restart
 
 ########## Test ##############
 echo "<?php phpinfo() ?>" > /var/www/html/index.php
