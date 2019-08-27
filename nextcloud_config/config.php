@@ -9,7 +9,7 @@ $CONFIG = array (
   ),
   'datadirectory' => 'MY_DATA_DIR',
   'dbtype' => 'mysql',
-  'version' => '15.0.9.1',
+  'version' => '16.0.4',
   'overwrite.cli.url' => 'https://MY_DOMAIN',
   'dbname' => 'nextcloud',
   'dbhost' => 'localhost',
