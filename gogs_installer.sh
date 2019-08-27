@@ -36,7 +36,8 @@ sudo rm gogs_0.11.91_raspi_armv7.zip
 
 
 echo "5.==> Configure gogs"
-sudo chown -R git:git /opt/gogs
+adduser --disabled-login --gecos 'Go Git Service' git
+chown -R git:git /opt/gogs
 
 rm /opt/gogs/scripts/systemd/gogs.service
 wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_config/gogs.service -P  /opt/gogs/scripts/systemd/
