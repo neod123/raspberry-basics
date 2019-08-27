@@ -11,9 +11,9 @@ apt update
 ########## install Nginx ##############
 if [ -f /etc/nginx/nginx.conf ]
 then
-    echo "==> 1. Nginx already installed"
+    echo "1.==> Nginx already installed"
 else 
-  echo "==> 1. Install Nginx"
+  echo "1.==> Install Nginx"
   apt-get install nginx -y
   sudo systemctl stop nginx.service
   sudo systemctl start nginx.service
@@ -24,7 +24,7 @@ fi
 ########## install MariaDb ##############
 if [ -f /usr/bin/mariadb ]
 then
-    echo "==> 2.3.. MariaDb already installed"
+    echo "2.3.==> MariaDb already installed"
 else 
 
   echo "2.==> install MariaDb"
