@@ -12,13 +12,13 @@ Be carefull: The script will ask few questions for the database access and passw
 # gogs installer
 ```wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_installer.sh | sh gogs_installer.sh | rm gogs_installer.sh```
 
-# Nextcloud installer (TBD)
+# Nextcloud installer 
 ```wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/nextcloud_installer.sh | sh nextcloud_installer.sh | rm nextcloud_installer.sh```
 
 # mail server installer (TBD)
 ```wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/mail_server_installer.sh | sh mail_server_installer.sh | rm mail_server_installer.sh```
 
-# octoprint installer (TBD)
+# octoprint installer 
 ```wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/octoprint_installer.sh | sh octoprint_installer.sh | rm octoprint_installer.sh```
 
 # concourse-ci installer (TBD)
