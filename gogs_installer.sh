@@ -1,26 +1,28 @@
 #!/bin/bash
 
-# /gogs_installer.sh | sh gogs_installer.sh |  rm  gogs_installer.sh
+# https://raw.githubusercontent.com/neod123/raspberry-basics/gogs_installer.sh | sh gogs_installer.sh |  rm  gogs_installer.sh
 
 
-if [ -f / ]
+########## install MariaDb ##############
+if [ -f /usr/bin/mariadb ]
 then
-    echo "==> 1. 2. Mariadb already installed"
- else   
-    echo "1.==> install MariaDb"
-    apt-get install mariadb-server mariadb-client -y
-    systemctl stop mariadb.service
-    systemctl start mariadb.service
-    systemctl enable mariadb.service
+    echo "==> 2.3.. MariaDb already installed"
+else 
 
-    echo "2.==> Secure MariaDb"
-    mysql_secure_installation
+  echo "2.==> install MariaDb"
+  sudo apt-get install mariadb-server mariadb-client -y
+  sudo systemctl stop mariadb.service
+  sudo systemctl start mariadb.service
+  sudo systemctl enable mariadb.service
 
-    systemctl stop mariadb.service
-    systemctl start mariadb.service
-    systemctl enable mariadb.service
+  echo "3.==> Secure MariaDb"
+  sudo mysql_secure_installation
 
+  sudo systemctl stop mariadb.service
+  sudo systemctl start mariadb.service
+  sudo systemctl enable mariadb.service
 fi
+
 
 
 echo "3.==> Install git"
@@ -36,30 +38,8 @@ sudo rm gogs_0.11.91_raspi_armv7.zip
 echo "5.==> Configure gogs"
 sudo chown -R git:git /opt/gogs
 
-
-cat "[Unit]
-Description=Gogs
-After=syslog.target
-After=network.target
-#After=mariadb.service mysqld.service postgresql.service memcached.service redis.service
- 
-[Service]
-# Modify these two values and uncomment them if you have
-# repos with lots of files and get an HTTP error 500 because
-# of that
-###
-#LimitMEMLOCK=infinity
-#LimitNOFILE=65535
-Type=simple
-User=git
-Group=git
-WorkingDirectory=/home/git/gogs
-ExecStart=/opt/gogs/gogs web
-Restart=always
-Environment=USER=git HOME=/home/git
- 
-[Install]
-WantedBy=multi-user.target" > /opt/gogs/scripts/systemd/gogs.service
+rm /opt/gogs/scripts/systemd/gogs.service
+wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_config/gogs.service -P  /opt/gogs/scripts/systemd/
 
 sudo -H -u git mkdir /home/git/gogs
 
