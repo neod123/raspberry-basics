@@ -6,7 +6,7 @@
 ########## install MariaDb ##############
 if [ -f /usr/bin/mariadb ]
 then
-    echo "==> 1.2. MariaDb already installed"
+    echo "1.2.==>  MariaDb already installed"
 else 
 
   echo "1.==> install MariaDb"
