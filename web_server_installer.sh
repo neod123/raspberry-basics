@@ -51,6 +51,7 @@ else
 
   echo "4.==> Install PHP7.3"
   apt install php7.3-fpm php7.3-common php7.3-mbstring php7.3-xmlrpc php7.3-soap php7.3-gd php7.3-xml php7.3-intl php7.3-mysql php7.3-cli php7.3-zip php7.3-curl -y
+  service php7.3-fpm reload
 fi
 
 echo "<?php phpinfo() ?>" > /var/www/html/index.php
