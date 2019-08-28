@@ -82,12 +82,12 @@ echo "Connect to MariaDb: please provide the main mariaDb password !!!"
 mysql -u root -p < nextcloud.sql 
 
 
-#
+############ setup domain name ##############
 echo "5.==> setup domain name"
 rm /etc/nginx/sites-available/nextcloud 
 wget  https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/nextcloud -P /etc/nginx/sites-available/ 
 
-echo "Domain to set:"
+echo "Domain to set (my_cloud.domainname.com):"
 read my_domain
 sed -i -e 's/cloud.mondomaine.com/$my_domain/g' /etc/nginx/sites-available/nextcloud 
 
@@ -137,6 +137,6 @@ sed -i -e 's/MY_DOMAIN/$my_domain/g' /var/www/nextcloud/config/
 sed -i -e 's/MY_DATA_DIR/$my_data_dir/g' /var/www/nextcloud/config/
 sed -i -e 's/MY_PASSWORD/$my_password/g' /var/www/nextcloud/config/
 
-echo "8.==> Test it:"
+echo "8.==> Test it: https://$my_domain"
 
 
