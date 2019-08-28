@@ -45,10 +45,20 @@ wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_conf
 sudo -H -u git mkdir /home/git/gogs
 
 
-echo "5.==> Start gogs service"
+echo "6.==> Create the DB"
+echo "sudo mysql -u root -p
+SET GLOBAL innodb_file_per_table = ON;
+CREATE DATABASE gogsdb;
+CREATE USER 'gogsuser'@'localhost' IDENTIFIED BY 'new_password_here';
+GRANT ALL ON gogsdb.* TO 'gogsuser'@'localhost' IDENTIFIED BY 'user_password_here' WITH GRANT OPTION;
+ALTER DATABASE gogsdb CHARACTER SET = utf8mb4 COLLATE utf8mb4_unicode_ci;
+FLUSH PRIVILEGES;
+EXIT;"
+
+echo "7.==> Start gogs service"
 sudo systemctl enable /opt/gogs/scripts/systemd/gogs.service
 sudo systemctl start gogs.service
 sudo systemctl status gogs.service
 
-echo "6.==> Test it: http://localhost:3000"
+echo "8.==> Test it: http://localhost:3000"
 
