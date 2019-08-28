@@ -50,14 +50,15 @@ sudo -H -u git mkdir /home/git/gogs
 
 ########## create the database ##############
 echo "6.==> Create the DB"
-echo "sudo mysql -u root -p
-SET GLOBAL innodb_file_per_table = ON;
-CREATE DATABASE gogsdb;
-CREATE USER 'gogsuser'@'localhost' IDENTIFIED BY 'new_password_here';
-GRANT ALL ON gogsdb.* TO 'gogsuser'@'localhost' IDENTIFIED BY 'user_password_here' WITH GRANT OPTION;
-ALTER DATABASE gogsdb CHARACTER SET = utf8mb4 COLLATE utf8mb4_unicode_ci;
-FLUSH PRIVILEGES;
-EXIT;"
+echo "Provide password for the new database:"
+read PASSWORD
+
+wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_config/gogs_database.sql
+sed -i 's/m_password/$PASSWORD/g' gogs_database.sql
+
+echo "Connect to MariaDb: please provide the main mariaDb password !!!"
+mysql -u root -p < gogs_database.sql 
+
 
 ########## Start gogs service ##############
 echo "7.==> Start gogs service"
