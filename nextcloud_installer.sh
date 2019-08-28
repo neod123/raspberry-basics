@@ -70,16 +70,17 @@ else
   sudo systemctl enable mariadb.service
 fi
 
-echo "4.3==> create the Database"
-echo "Database password to set:"
-read my_password
+########## create the database ##############
+echo "4.3.==> Create the DB"
+echo "Provide password for the new database:"
+read PASSWORD
 
-mysql -u root -p < 'CREATE DATABASE nextcloud;
-CREATE USER "nextcloud"@"localhost";
-SET password FOR "nextcloud"@"localhost" = password(\'$my_password\');
-GRANT ALL PRIVILEGES ON nextcloud.* TO "nextcloud"@"localhost" IDENTIFIED BY "$my_password";
-FLUSH PRIVILEGES;
-EXIT'
+wget https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/nextcloud.sql
+sed -i 's/m_password/$PASSWORD/g' nextcloud.sql
+
+echo "Connect to MariaDb: please provide the main mariaDb password !!!"
+mysql -u root -p < nextcloud.sql 
+
 
 #
 echo "5.==> setup domain name"
