@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/nextcloud_installer.sh | sh nextcloud_installer.sh |  rm  nextcloud_installer.sh
+#
+# src: https://howto.wared.fr/ubuntu-installation-nextcloud-nginx/
+# add a hard_drive folder: https://docs.nextcloud.com/server/9/admin_manual/configuration_files/external_storage/local.html
 
 
 apt update
