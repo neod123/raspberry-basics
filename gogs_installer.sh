@@ -18,6 +18,7 @@ else
   sudo systemctl enable mariadb.service
 
   echo "2.==> Secure MariaDb"
+  echo "Please feel all general infos for MariaDB configuration and don t forget the user and the password for root!!"
   sudo mysql_secure_installation
 
   sudo systemctl stop mariadb.service
