@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_installer.sh | sh gogs_installer.sh |  rm  gogs_installer.sh
-
+#
+# src: https://www.techcoil.com/blog/setting-up-your-own-raspberry-pi-3-git-server-with-go-git-service-gogs-and-raspbian-stretch-lite/
+# src: https://websiteforstudents.com/install-gogs-git-server-with-mariadb-on-ubuntu-16-04-18-04-lts/
 
 ########## install MariaDb ##############
 if [ -f /usr/bin/mariadb ]
@@ -24,10 +26,11 @@ else
 fi
 
 
-
+########## install git ##############
 echo "3.==> Install git"
 sudo apt-get install git -y
 
+########## install gogs ##############
 echo "4.==> install gogs"
 cd /opt
 sudo wget https://dl.gogs.io/0.11.91/gogs_0.11.91_raspi_armv7.zip
@@ -35,6 +38,7 @@ sudo unzip -o gogs_0.11.91_raspi_armv7.zip
 sudo rm gogs_0.11.91_raspi_armv7.zip
 
 
+########## Configure gogs ##############
 echo "5.==> Configure gogs"
 adduser --disabled-login --gecos 'Go Git Service' git
 chown -R git:git /opt/gogs
@@ -44,7 +48,7 @@ wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_conf
 
 sudo -H -u git mkdir /home/git/gogs
 
-
+########## create the database ##############
 echo "6.==> Create the DB"
 echo "sudo mysql -u root -p
 SET GLOBAL innodb_file_per_table = ON;
@@ -55,6 +59,7 @@ ALTER DATABASE gogsdb CHARACTER SET = utf8mb4 COLLATE utf8mb4_unicode_ci;
 FLUSH PRIVILEGES;
 EXIT;"
 
+########## Start gogs service ##############
 echo "7.==> Start gogs service"
 sudo systemctl enable /opt/gogs/scripts/systemd/gogs.service
 sudo systemctl start gogs.service
