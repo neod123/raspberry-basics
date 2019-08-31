@@ -92,7 +92,7 @@ wget  https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/ne
 
 echo "Domain to set (my_cloud.domainname.com):"
 read my_domain
-sed -i -e 's/cloud.mondomaine.com/$my_domain/g' /etc/nginx/sites-available/nextcloud 
+sed -i -e 's/cloud.mondomaine.com/'"$my_domain"'/g' /etc/nginx/sites-available/nextcloud 
 
 
 ln -s /etc/nginx/sites-available/nextcloud /etc/nginx/sites-enabled/nextcloud
@@ -136,9 +136,9 @@ echo "Set the folder (/media/Hard_Drive):"
 read my_data_dir
 rm /var/www/nextcloud/config/config.php
 wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/nextcloud_config/config.php -P /var/www/nextcloud/config/
-sed -i -e 's/MY_DOMAIN/$my_domain/g' /var/www/nextcloud/config/
-sed -i -e 's/MY_DATA_DIR/$my_data_dir/g' /var/www/nextcloud/config/
-sed -i -e 's/MY_PASSWORD/$my_password/g' /var/www/nextcloud/config/
+sed -i -e 's/MY_DOMAIN/'"$my_domain"'/g' /var/www/nextcloud/config/
+sed -i -e 's/MY_DATA_DIR/'"$my_data_dir"'/g' /var/www/nextcloud/config/
+sed -i -e 's/MY_PASSWORD/'"$my_password"'/g' /var/www/nextcloud/config/
 
 echo "8.==> Test it: https://$my_domain"
 
