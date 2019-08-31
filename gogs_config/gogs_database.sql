@@ -4,9 +4,6 @@ grant all privileges on gogsdb.* to gogs@localhost ;
 FLUSH PRIVILEGES;
 use gogsdb;
 SET default_storage_engine=INNODB;
-SHOW DATABASEs;
-select user, password, host from 
-exit
-
+SHOW DATABASES;
 
 
