@@ -51,8 +51,10 @@ sudo -H -u git mkdir /home/git/gogs
 
 ########## create the database ##############
 echo "6.==> Create the DB"
-echo "Provide password for the new database:"
+echo "Provide password for the new user in database:"
 read PASSWORD
+
+mysql -u root -p < /opt/gogs/scripts/mysql.sql 
 
 wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_config/gogs_database.sql
 sed -i 's/m_password/$PASSWORD/g' gogs_database.sql
