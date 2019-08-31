@@ -88,7 +88,7 @@ mysql -u root -p < nextcloud.sql
 ############ setup domain name ##############
 echo "5.==> setup domain name"
 rm /etc/nginx/sites-available/nextcloud 
-wget  https://github.com/neod123/raspberry-basics/new/master/nextcloud_config/nextcloud -P /etc/nginx/sites-available/ 
+wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/nextcloud_config/nextcloud -P /etc/nginx/sites-available/ 
 
 echo "Domain to set (my_cloud.domainname.com):"
 read my_domain
