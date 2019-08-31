@@ -58,7 +58,7 @@ read PASSWORD
 
 wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/gogs_config/gogs_database.sql
 sed -i 's/m_password/$PASSWORD/g' gogs_database.sql
-
+cat gogs_database.sql
 echo "Connect to MariaDb: please provide the main mariaDb password !!!"
 mysql -u root -p < gogs_database.sql 
 
