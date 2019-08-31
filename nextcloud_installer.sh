@@ -136,9 +136,9 @@ echo "Set the folder (/media/Hard_Drive):"
 read my_data_dir
 rm /var/www/nextcloud/config/config.php
 wget https://raw.githubusercontent.com/neod123/raspberry-basics/master/nextcloud_config/config.php -P /var/www/nextcloud/config/
-sed -i -e 's/MY_DOMAIN/'"$my_domain"'/g' /var/www/nextcloud/config/
-sed -i -e 's/MY_DATA_DIR/'"$my_data_dir"'/g' /var/www/nextcloud/config/
-sed -i -e 's/MY_PASSWORD/'"$my_password"'/g' /var/www/nextcloud/config/
+sed -i -e 's/MY_DOMAIN/'"$my_domain"'/g' /var/www/nextcloud/config/config.php 
+sed -i -e 's/MY_DATA_DIR/'"$my_data_dir"'/g' /var/www/nextcloud/config/config.php 
+sed -i -e 's/MY_PASSWORD/'"$my_password"'/g' /var/www/nextcloud/config/config.php 
 
 echo "8.==> Test it: https://$my_domain"
 
