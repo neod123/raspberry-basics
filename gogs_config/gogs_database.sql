@@ -1,9 +1,12 @@
-SET GLOBAL innodb_file_per_table = ON;
-CREATE DATABASE gogsdb;
-CREATE USER 'gogsuser' IDENTIFIED BY 'm_password';
-GRANT ALL ON gogsdb.* TO 'gogsuser'@'localhost' IDENTIFIED BY 'm_password' WITH GRANT OPTION;
-ALTER DATABASE gogsdb CHARACTER SET = utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS gogsdb CHARACTER SET utf8 COLLATE utf8_general_ci;
+grant usage on gogsdb.* to gogs@localhost identified by 'm_password';
+grant all privileges on gogsdb.* to gogs@localhost ;
 FLUSH PRIVILEGES;
+use gogsdb;
+SET default_storage_engine=INNODB;
 SHOW DATABASEs;
-select user, password, host from mysql.user;
+select user, password, host from 
 exit
+
+
+
