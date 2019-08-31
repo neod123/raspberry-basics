@@ -65,7 +65,8 @@ mysql -u root -p < gogs_database.sql
 echo "7.==> Start gogs service"
 sudo systemctl enable /opt/gogs/scripts/systemd/gogs.service
 sudo systemctl start gogs.service
+
+echo "8.==> Done: Test it: http://localhost:3000"
 sudo systemctl status gogs.service
 
-echo "8.==> Test it: http://localhost:3000"
 
