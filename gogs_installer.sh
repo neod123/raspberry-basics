@@ -69,6 +69,7 @@ sudo systemctl enable /opt/gogs/scripts/systemd/gogs.service
 sudo systemctl start gogs.service
 
 echo "8.==> Done: Test it: http://localhost:3000"
+echo "Info: database name: gogsdb, username: gogsuser"
 sudo systemctl status gogs.service
 
 
